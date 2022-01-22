@@ -1,16 +1,13 @@
-package Entities;
+package entities;
 
 import enums.Category;
 
-public class Gift {
-    private String productName;
-    private Double price;
-    private Category category;
+public class SantaGift extends Gift{
     private int quantity;
 
-    public Gift(){}
+    public SantaGift() { }
 
-    public Gift(String productName, Double price, Category category, int quantity) {
+    public SantaGift(String productName, Double price, Category category, int quantity) {
         this.productName = productName;
         this.price = price;
         this.category = category;
@@ -55,11 +52,16 @@ public class Gift {
 
     @Override
     public String toString() {
-        return "{" +
-                "productName='" + productName + '\'' +
-                ", price=" + price +
-                ", category=" + category +
-                ", quantity=" + quantity +
+        return "{"
+                +
+                "productName='" + productName + '\''
+                +
+                ", price=" + price
+                +
+                ", category=" + category
+                +
+                ", quantity=" + quantity
+                +
                 '}';
     }
 }

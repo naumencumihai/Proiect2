@@ -1,4 +1,4 @@
-package Entities;
+package entities;
 
 import enums.Category;
 import enums.Cities;
@@ -6,22 +6,16 @@ import enums.ElvesType;
 
 import java.util.List;
 
-public class Child {
-    private int id;
-    private String lastName;
-    private String firstName;
-    private int age;
-    private Cities city;
+public class SantaChild extends ChildSuper {
     private Double niceScore;
-    private List<Category> giftsPreferences;
     private Double niceScoreBonus;
     private ElvesType elf;
 
-    public Child() {}
+    public SantaChild() { }
 
-    public Child(int id, String lastName, String firstName, int age,
-                 Cities city, Double niceScore, List<Category> giftsPreferences,
-                 Double niceScoreBonus, ElvesType elf) {
+    public SantaChild(int id, String lastName, String firstName, int age,
+                      Cities city, Double niceScore, List<Category> giftsPreferences,
+                      Double niceScoreBonus, ElvesType elf) {
         this.id = id;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -111,16 +105,26 @@ public class Child {
 
     @Override
     public String toString() {
-        return "{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", age=" + age +
-                ", city=" + city +
-                ", niceScore=" + niceScore +
-                ", giftsPreferences=" + giftsPreferences +
-                ", niceScoreBonus=" + niceScoreBonus +
-                ", elf=" + elf +
+        return "{"
+                +
+                "id=" + id
+                +
+                ", lastName='" + lastName + '\''
+                +
+                ", firstName='" + firstName + '\''
+                +
+                ", age=" + age
+                +
+                ", city=" + city
+                +
+                ", niceScore=" + niceScore
+                +
+                ", giftsPreferences=" + giftsPreferences
+                +
+                ", niceScoreBonus=" + niceScoreBonus
+                +
+                ", elf=" + elf
+                +
                 '}';
     }
 }

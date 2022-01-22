@@ -1,43 +1,42 @@
 package Storage;
 
-import Entities.Child;
-import Entities.Gift;
-import org.jetbrains.annotations.NotNull;
+import entities.SantaChild;
+import entities.SantaGift;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class InitialData {
-    List<Child> children = new ArrayList<>();
-    List<Gift> santaGiftsList = new ArrayList<>();
+    List<SantaChild> santaChildren = new ArrayList<>();
+    List<SantaGift> santaGiftsList = new ArrayList<>();
 
     public InitialData() {}
 
-    public InitialData(List<Child> children, List<Gift> santaGiftsList) {
-        this.children = children;
+    public InitialData(List<SantaChild> santaChildren, List<SantaGift> santaGiftsList) {
+        this.santaChildren = santaChildren;
         this.santaGiftsList = santaGiftsList;
     }
 
-    public List<Child> getChildren() {
-        return children;
+    public List<SantaChild> getChildren() {
+        return santaChildren;
     }
 
-    public List<Gift> getSantaGiftsList() {
+    public List<SantaGift> getSantaGiftsList() {
         return santaGiftsList;
     }
 
-    public void setChildren(List<Child> children) {
-        this.children = children;
+    public void setChildren(List<SantaChild> santaChildren) {
+        this.santaChildren = santaChildren;
     }
 
-    public void setSantaGiftsList(List<Gift> santaGiftsList) {
+    public void setSantaGiftsList(List<SantaGift> santaGiftsList) {
         this.santaGiftsList = santaGiftsList;
     }
 
     @Override
     public String toString() {
         return "{" +
-                "children=" + children +
+                "santaChildren=" + santaChildren +
                 ", santaGiftsList=" + santaGiftsList +
                 '}';
     }

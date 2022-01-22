@@ -1,4 +1,4 @@
-package Entities;
+package entities;
 
 import enums.Category;
 import enums.ElvesType;
@@ -11,7 +11,7 @@ public class ChildUpdate {
     private List<Category> giftsPreferences;
     private ElvesType elf;
 
-    public ChildUpdate(){}
+    public ChildUpdate() { }
 
     public ChildUpdate(int id, Double niceScore, List<Category> giftsPreferences, ElvesType elf) {
         this.id = id;
@@ -38,11 +38,16 @@ public class ChildUpdate {
 
     @Override
     public String toString() {
-        return "{" +
-                "id=" + id +
-                ", niceScore=" + niceScore +
-                ", giftsPreferences=" + giftsPreferences +
-                ", elf=" + elf +
+        return "{"
+                +
+                "id=" + id
+                +
+                ", niceScore=" + niceScore
+                +
+                ", giftsPreferences=" + giftsPreferences
+                +
+                ", elf=" + elf
+                +
                 '}';
     }
 }

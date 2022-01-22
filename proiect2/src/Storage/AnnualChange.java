@@ -1,28 +1,28 @@
 package Storage;
 
-import Entities.Child;
-import Entities.ChildUpdate;
-import Entities.Gift;
+import entities.SantaChild;
+import entities.ChildUpdate;
+import entities.SantaGift;
 import enums.CityStrategyEnum;
 
 import java.util.List;
 
 public class AnnualChange {
     private Double newSantaBudget;
-    private List<Gift> newGifts;
-    private List<Child> newChildren;
+    private List<SantaGift> newSantaGifts;
+    private List<SantaChild> newSantaChildren;
     private List<ChildUpdate> childrenUpdates;
     private CityStrategyEnum strategy;
 
     public AnnualChange(){}
 
-    public AnnualChange(Double newSantaBudget, List<Gift> newGifts,
-                        List<Child> newChildren,
+    public AnnualChange(Double newSantaBudget, List<SantaGift> newSantaGifts,
+                        List<SantaChild> newSantaChildren,
                         List<ChildUpdate> childrenUpdates,
                         CityStrategyEnum strategy) {
         this.newSantaBudget = newSantaBudget;
-        this.newGifts = newGifts;
-        this.newChildren = newChildren;
+        this.newSantaGifts = newSantaGifts;
+        this.newSantaChildren = newSantaChildren;
         this.childrenUpdates = childrenUpdates;
         this.strategy = strategy;
     }
@@ -35,20 +35,20 @@ public class AnnualChange {
         this.newSantaBudget = newSantaBudget;
     }
 
-    public List<Gift> getNewGifts() {
-        return newGifts;
+    public List<SantaGift> getNewGifts() {
+        return newSantaGifts;
     }
 
-    public void setNewGifts(List<Gift> newGifts) {
-        this.newGifts = newGifts;
+    public void setNewGifts(List<SantaGift> newSantaGifts) {
+        this.newSantaGifts = newSantaGifts;
     }
 
-    public List<Child> getNewChildren() {
-        return newChildren;
+    public List<SantaChild> getNewChildren() {
+        return newSantaChildren;
     }
 
-    public void setNewChildren(List<Child> newChildren) {
-        this.newChildren = newChildren;
+    public void setNewChildren(List<SantaChild> newSantaChildren) {
+        this.newSantaChildren = newSantaChildren;
     }
 
     public List<ChildUpdate> getChildrenUpdates() {
@@ -71,8 +71,8 @@ public class AnnualChange {
     public String toString() {
         return "annualChange{" +
                 "newSantaBudget=" + newSantaBudget +
-                ", newGifts=" + newGifts +
-                ", newChildren=" + newChildren +
+                ", newSantaGifts=" + newSantaGifts +
+                ", newSantaChildren=" + newSantaChildren +
                 ", childrenUpdates=" + childrenUpdates +
                 ", strategy=" + strategy +
                 '}';

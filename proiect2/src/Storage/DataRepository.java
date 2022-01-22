@@ -8,9 +8,7 @@ public class DataRepository {
     private InitialData initialData;
     private List<AnnualChange> annualChanges;
 
-    public DataRepository() {
-
-    }
+    public DataRepository() {}
 
     public DataRepository(int numberOfYears, Double santaBudget, InitialData initialData, List<AnnualChange> annualChanges) {
         this.numberOfYears = numberOfYears;

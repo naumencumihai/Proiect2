@@ -1,7 +1,7 @@
 package main;
 
-import Entities.Child;
-import Entities.Gift;
+import entities.SantaChild;
+import entities.SantaGift;
 import Storage.AnnualChange;
 import Storage.DataRepository;
 import Storage.InitialData;
@@ -20,13 +20,15 @@ public class App {
     DataRepository inputData = new DataRepository();
     JsonNode input;
 
-    public App() {}
+    public App() { }
 
     public void ParseInput(Integer testNumber) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            input = mapper.readTree(new File("tests/test" + testNumber + FILE_EXTENSION));
+            input = mapper.readTree(new File("tests/test"
+                    + testNumber
+                    + FILE_EXTENSION));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -35,11 +37,11 @@ public class App {
         JsonNode jsonNode = mapper.readTree(initialDataString);
         String childrenString = jsonNode.get("children").toString();
         String santaGiftsListString = jsonNode.get("santaGiftsList").toString();
-        List<Child> children = mapper.readValue(childrenString,
+        List<SantaChild> santaChildren = mapper.readValue(childrenString,
                 new TypeReference<>() {});
-        List<Gift> gifts = mapper.readValue(santaGiftsListString,
+        List<SantaGift> santaGifts = mapper.readValue(santaGiftsListString,
                 new TypeReference<>() {});
-        InitialData initialData = new InitialData(children, gifts);
+        InitialData initialData = new InitialData(santaChildren, santaGifts);
 
         String annualChangesString = input.get("annualChanges").toString();
         List<AnnualChange> annualChanges = mapper.readValue(annualChangesString,
@@ -50,4 +52,6 @@ public class App {
         inputData.setInitialData(initialData);
         inputData.setAnnualChanges(annualChanges);
     }
+
+
 }
