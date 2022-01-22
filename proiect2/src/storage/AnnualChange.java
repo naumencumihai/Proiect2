@@ -1,4 +1,4 @@
-package Storage;
+package storage;
 
 import entities.SantaChild;
 import entities.ChildUpdate;

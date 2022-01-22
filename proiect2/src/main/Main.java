@@ -18,7 +18,7 @@ public final class Main {
      */
     public static void main(final String[] args) throws JsonProcessingException {
         App app = new App();
-        app.ParseInput(19);
+        app.ParseInput(27);
 
 
         Checker.calculateScore();
