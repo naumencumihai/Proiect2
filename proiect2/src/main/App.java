@@ -3,7 +3,7 @@ package main;
 import entities.SantaChild;
 import entities.SantaGift;
 import Storage.AnnualChange;
-import Storage.DataRepository;
+import Storage.InputData;
 import Storage.InitialData;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,7 +17,7 @@ import java.util.List;
 import static common.Constants.FILE_EXTENSION;
 
 public class App {
-    DataRepository inputData = new DataRepository();
+    InputData inputData = new InputData();
     JsonNode input;
 
     public App() { }

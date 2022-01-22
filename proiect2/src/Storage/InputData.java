@@ -2,15 +2,15 @@ package Storage;
 
 import java.util.List;
 
-public class DataRepository {
+public class InputData {
     private int numberOfYears;
     private Double santaBudget;
     private InitialData initialData;
     private List<AnnualChange> annualChanges;
 
-    public DataRepository() {}
+    public InputData() {}
 
-    public DataRepository(int numberOfYears, Double santaBudget, InitialData initialData, List<AnnualChange> annualChanges) {
+    public InputData(int numberOfYears, Double santaBudget, InitialData initialData, List<AnnualChange> annualChanges) {
         this.numberOfYears = numberOfYears;
         this.santaBudget = santaBudget;
         this.initialData = initialData;

@@ -15,6 +15,12 @@ public class Gift {
         this.category = category;
     }
 
+    public Gift(SantaGift santaGift) {
+        this.productName = santaGift.getProductName();
+        this.price = santaGift.getPrice();
+        this.category = santaGift.getCategory();
+    }
+
     public String getProductName() {
         return productName;
     }
