@@ -6,15 +6,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutputData {
-    private final List<List<Child>> annualChildren = new ArrayList<>();
+    private final List<Children> annualChildren = new ArrayList<>();
 
     public OutputData() { }
 
-    public void addChildrenThisYear(List<Child> childrenThisYear) {
+    public void addChildrenThisYear(Children childrenThisYear) {
         annualChildren.add(childrenThisYear);
     }
 
-    public List<List<Child>> getAnnualChildren() {
+    public List<Children> getAnnualChildren() {
         return annualChildren;
     }
 

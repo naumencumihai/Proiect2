@@ -1,7 +1,8 @@
 package main;
 
 import checker.Checker;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
+import java.io.IOException;
 
 /**
  * Class used to run the code
@@ -16,13 +17,13 @@ public final class Main {
      * @param args
      *          the arguments used to call the main method
      */
-    public static void main(final String[] args) throws JsonProcessingException {
-        App app = new App();
-        app.ParseInput(10);
-        app.WriteOutputData();
-        app.WriteToFile(10);
-//        System.out.println(app.getOutputData());
-//        System.out.println("\n" + app.getSanta());
+    public static void main(final String[] args) throws IOException {
+        for (int i = 1; i <= 30; i++) {
+            App app = new App();
+            app.ParseInput(i);
+            app.WriteOutputData();
+            app.WriteToFile(i);
+        }
 
         Checker.calculateScore();
     }

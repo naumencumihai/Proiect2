@@ -2,9 +2,10 @@ package strategy;
 
 import entities.Child;
 import main.App;
+import storage.Children;
 
 import java.util.List;
 
 public interface Strategy {
-    List<Child> getChildrenThisYear(App app, int year);
+    Children getChildrenThisYear(App app, int year);
 }

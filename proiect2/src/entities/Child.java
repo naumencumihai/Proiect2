@@ -34,7 +34,7 @@ public class Child extends ChildSuper {
         this.firstName = santaChild.getFirstName();
         this.age = santaChild.getAge();
         this.city = santaChild.getCity();
-        this.giftsPreferences = santaChild.getGiftsPreferences();
+        this.giftsPreferences.addAll(santaChild.getGiftsPreferences());
     }
 
     public void addToNiceScoreHistory(Double niceScore) {
@@ -66,10 +66,6 @@ public class Child extends ChildSuper {
             }
             averageScore /= divisor;
         }
-    }
-
-    public boolean isYoungAdult() {
-        return age > 18;
     }
 
     public List<Double> getNiceScoreHistory() {

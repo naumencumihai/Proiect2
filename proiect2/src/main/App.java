@@ -1,6 +1,8 @@
 package main;
 
-import entities.Child;
+import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
+import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import enums.CityStrategyEnum;
 import storage.OutputData;
 import entities.Santa;
@@ -17,10 +19,10 @@ import strategy.StrategyFactory;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import static common.Constants.FILE_EXTENSION;
+import static common.Constants.OUTPUT_PATH;
 
 public class App {
     private JsonNode input;
@@ -65,13 +67,18 @@ public class App {
 
         for (int i = 0; i < numberOfYears; i++) {
             Strategy strategy = strategyFactory.createStrategy(annualChanges.get(i).getStrategy());
-            System.out.println(strategy);
             outputData.addChildrenThisYear(strategy.getChildrenThisYear(this, i + 1));
         }
     }
 
-    public void WriteToFile(Integer testNumber) {
+    public void WriteToFile(Integer testNumber) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
 
+        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        mapper.writeValue(new File(OUTPUT_PATH
+                + testNumber
+                + FILE_EXTENSION), outputData);
     }
 
     public List<AnnualChange> getAnnualChanges() {
@@ -80,10 +87,6 @@ public class App {
 
     public Santa getSanta() {
         return santa;
-    }
-
-    public void setSanta(Santa santa) {
-        this.santa = santa;
     }
 
     public OutputData getOutputData() {

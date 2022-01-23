@@ -5,16 +5,15 @@ import enums.Category;
 import enums.ElvesType;
 import main.App;
 import storage.AnnualChange;
+import storage.Children;
 import storage.ChildrenRecord;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 public class IdStrategy implements Strategy {
 
     @Override
-    public List<Child> getChildrenThisYear(App app, int year) {
+    public Children getChildrenThisYear(App app, int year) {
         List<Child> childrenThisYear =  new ArrayList<>();
         Santa santa = app.getSanta();
         ChildrenRecord childrenRecord = santa.getChildrenRecord();
@@ -29,16 +28,6 @@ public class IdStrategy implements Strategy {
             for (Child child : childrenThisYear) {
                 child.setNiceScoreHistory(childrenRecord.getNiceScoreHistoryForChild(child.getId()));
             }
-
-            //First Stage (assign average score and budget to children)
-            executeFirstStage(childrenThisYear, santa);
-
-            //Second Stage (assign gifts)
-            executeSecondStage(childrenThisYear, santa);
-
-            System.out.println(" ====== " +childrenRecord + " ====== ");
-
-            return childrenThisYear;
         }
         //Subsequent years
         else {
@@ -60,7 +49,9 @@ public class IdStrategy implements Strategy {
                             santaChild.setNiceScore(childUpdate.getNiceScore());
                             childrenRecord.addNiceScoreToRecord(santaChild.getId(), childUpdate.getNiceScore());
                         }
-                        for (Category category : childUpdate.getGiftsPreferences()) {
+                        List<Category> reveresePreferences = childUpdate.getGiftsPreferences();
+                        Collections.reverse(reveresePreferences);
+                        for (Category category : reveresePreferences) {
                             santaChild.addToGiftPreferences(category);
                         }
                         santaChild.setElf(childUpdate.getElf());
@@ -77,31 +68,26 @@ public class IdStrategy implements Strategy {
             //Put children from Santa's list in another list for output
             for (SantaChild santaChild : santa.getSantaChildren()) {
                 childrenThisYear.add(new Child(santaChild));
-//                System.out.println("===" + santaChild + "===");
             }
 
             for (Child child : childrenThisYear) {
                 child.setNiceScoreHistory(childrenRecord.getNiceScoreHistoryForChild(child.getId()));
             }
-
-            //First Stage (assign average score and budget to children)
-            executeFirstStage(childrenThisYear, santa);
-
-            //Second Stage (assign gifts)
-            executeSecondStage(childrenThisYear, santa);
-
-            System.out.println(" ====== " +childrenRecord + " ====== ");
-
-            return childrenThisYear;
         }
+        //First Stage (assign average score and budget to children)
+        executeFirstStage(childrenThisYear, santa);
+        //Second Stage (assign gifts)
+        executeSecondStage(childrenThisYear, santa);
+        return new Children(childrenThisYear);
     }
 
     private void executeFirstStage(List<Child> children, Santa santa) {
         //Remove young adults and calculate avg. scores for children
-        for (Child child : children) {
-            if (child.isYoungAdult()) {
-                children.remove(child);
+        for (Iterator<Child> iterator = children.iterator(); iterator.hasNext();) {
+            Child child = iterator.next();
+            if (child.getAge() > 18) {
                 santa.removeChild(child.getId());
+                iterator.remove();
             } else {
                 child.setAverageScoreWithoutBonus();
                 child.addBonus(santa.getNiceScoreBonusForChild(child.getId()));
