@@ -6,11 +6,11 @@ import enums.Cities;
 
 import java.util.*;
 
-public class CityMap {
+public class CitySorter {
     private static Set<Cities> cityNames = new HashSet<>();
     private static List<City> cities;
 
-    public CityMap() { }
+    public CitySorter() { }
 
     public static List<Child> sortByCities(List<Child> children) {
         cities = extractSortedCities(children);

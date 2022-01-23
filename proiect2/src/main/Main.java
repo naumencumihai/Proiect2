@@ -24,7 +24,6 @@ public final class Main {
             app.WriteOutputData();
             app.WriteToFile(i);
         }
-
         Checker.calculateScore();
     }
 }

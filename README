@@ -1,0 +1,25 @@
+Naumencu Mihai
+336 CA
+
+Entry point-ul pentru implementarea aplicatiei se afla intr-un obiect de tip App. Acesta 
+citeste din fisierele de input si introduce datele intr-un obiect outputData, responsabil
+cu stocarea informatiilor relevante din fisierele JSON, dupa care scrie datele in fisierele
+de output aplicand strategia relevanta.
+
+Datele primite sunt stocate in entitati relevante, diferentiate in 2 categorii:
+	- obiecte primite ca input (SantaGift, SantaChild, AnnualChange, ChildUpdate)
+	- obiecte pentru output (Gift, Child)
+
+Cele 3 strategii de asignare a cadourilor pentru copii sunt implementate cu ajutorul
+design pattern-ului strategy, un obiect de acest tip fiind creat prin intermediul unui
+factory (StrategyFactory):
+	- strategia id, implicita (datele despre copii sunt deja ordonate crescator in funtie
+	de id)
+	- strategia niceScore, implementata sortand lista de copii dupa field-ul relevant 
+	(averageScore)
+	- strategia niceScoreCity, implemetata sortand lista de copii cu ajutorul clasei statice
+	CitySorter, ce sorteaza o lista de copii in functie de orasele relevante (orasele
+	fiind sortate la randul lor dupa un averageScor al tuturor copiilor din orasul respectiv)
+
+Implementare efectiva pe fiecare test in parte se face in clasa Main, tot aceasta fiind
+responsabila pentru call-ul catre Checker.

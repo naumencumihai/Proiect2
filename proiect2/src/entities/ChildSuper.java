@@ -6,7 +6,7 @@ import enums.Cities;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ChildSuper {
+public class ChildSuper {
     protected int id;
     protected String lastName;
     protected String firstName;

@@ -1,7 +1,5 @@
 package main;
 
-import com.fasterxml.jackson.core.util.DefaultPrettyPrinter;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import enums.CityStrategyEnum;
 import storage.OutputData;
@@ -10,7 +8,6 @@ import entities.SantaChild;
 import entities.SantaGift;
 import storage.AnnualChange;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -33,7 +30,7 @@ public class App {
 
     public App() { }
 
-    public void ParseInput(Integer testNumber) throws JsonProcessingException {
+    public void ParseInput(Integer testNumber) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
@@ -49,13 +46,13 @@ public class App {
         String childrenString = jsonNode.get("children").toString();
         String santaGiftsListString = jsonNode.get("santaGiftsList").toString();
         List<SantaChild> santaChildren = mapper.readValue(childrenString,
-                new TypeReference<>() {});
+                new TypeReference<List<SantaChild>>() {});
         List<SantaGift> santaGifts = mapper.readValue(santaGiftsListString,
-                new TypeReference<>() {});
+                new TypeReference<List<SantaGift>>() {});
         String annualChangesString = input.get("annualChanges").toString();
 
         numberOfYears = input.get("numberOfYears").asInt();
-        annualChanges = mapper.readValue(annualChangesString, new TypeReference<>() {});
+        annualChanges = mapper.readValue(annualChangesString, new TypeReference<List<AnnualChange>>() {});
         santa = new Santa(santaChildren, santaGifts, input.get("santaBudget").asDouble());
     }
 
@@ -87,9 +84,5 @@ public class App {
 
     public Santa getSanta() {
         return santa;
-    }
-
-    public OutputData getOutputData() {
-        return outputData;
     }
 }

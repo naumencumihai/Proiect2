@@ -1,12 +1,9 @@
 package storage;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ChildrenRecord {
-    private final Map<Integer, List<Double>> niceScoreHistoryRecord =  new HashMap<>();
+    private final Map<Integer, List<Double>> niceScoreHistoryRecord = new TreeMap<>();
 
     public ChildrenRecord() { }
 

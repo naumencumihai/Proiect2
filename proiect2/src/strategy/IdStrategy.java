@@ -13,14 +13,15 @@ import java.util.*;
 public class IdStrategy implements Strategy {
 
     @Override
-    public Children getChildrenThisYear(App app, int year) {
+    public Children getChildrenThisYear(App app, int year){
         List<Child> childrenThisYear =  new ArrayList<>();
         Santa santa = app.getSanta();
         ChildrenRecord childrenRecord = santa.getChildrenRecord();
         //First year
         if (year == 0) {
             //Put children from Santa's list in another list for output
-            for (SantaChild santaChild : santa.getSantaChildren()) {
+            List<SantaChild> santaChildren = santa.getSantaChildren();
+            for (SantaChild santaChild : santaChildren) {
                 childrenRecord.addNiceScoreToRecord(santaChild.getId(), santaChild.getNiceScore());
                 childrenThisYear.add(new Child(santaChild));
             }
@@ -78,6 +79,7 @@ public class IdStrategy implements Strategy {
         executeFirstStage(childrenThisYear, santa);
         //Second Stage (assign gifts)
         executeSecondStage(childrenThisYear, santa);
+
         return new Children(childrenThisYear);
     }
 
@@ -139,6 +141,38 @@ public class IdStrategy implements Strategy {
                     if (budget >= possibleGifts.get(0).getPrice()
                             && possibleGifts.get(0).getQuantity() != 0) {
                         budget -= possibleGifts.get(0).getPrice();
+                        santa.decreaseQuantityForGift(possibleGifts.get(0).getProductName());
+                        giftReceived = new Gift(possibleGifts.get(0));
+                    }
+                }
+                if (giftReceived != null)
+                    child.addGift(giftReceived);
+            }
+        }
+        //Yellow elf assigns gift
+        for (Child child : children) {
+            if (santa.getElfForChild(child.getId()) == ElvesType.YELLOW
+                    && child.getReceivedGifts().isEmpty()) {
+                List<SantaGift> possibleGifts = new ArrayList<>();
+                for (SantaGift santaGift : santa.getSantaGifts()) {
+                    if (santaGift.getCategory() == child.getGiftsPreferences().get(0)) {
+                        possibleGifts.add(santaGift);
+                    }
+                }
+                Gift giftReceived = null;
+                //Assign gift if only 1 in category
+                if (possibleGifts.size() == 1
+                        && possibleGifts.get(0).getQuantity() != 0) {
+                    //Decrease quantity of gift in santa's sack
+                    santa.decreaseQuantityForGift(possibleGifts.get(0).getProductName());
+                    //Assign gift to child
+                    giftReceived = new Gift(possibleGifts.get(0));
+                    //Assign gift if more than 1 in category
+                } else if (possibleGifts.size() > 1) {
+                    //sort by price
+                    possibleGifts.sort(Comparator.comparing(SantaGift::getPrice));
+                    //if in budget
+                    if (possibleGifts.get(0).getQuantity() != 0) {
                         santa.decreaseQuantityForGift(possibleGifts.get(0).getProductName());
                         giftReceived = new Gift(possibleGifts.get(0));
                     }

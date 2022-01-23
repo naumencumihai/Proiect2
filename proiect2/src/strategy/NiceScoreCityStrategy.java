@@ -7,7 +7,7 @@ import main.App;
 import storage.AnnualChange;
 import storage.Children;
 import storage.ChildrenRecord;
-import storage.CityMap;
+import storage.CitySorter;
 
 import java.util.*;
 
@@ -101,7 +101,7 @@ public class NiceScoreCityStrategy implements Strategy {
     }
     private void executeSecondStage(List<Child> children, Santa santa) {
         //children.sort(Comparator.comparing(Child::getAverageScore).reversed().thenComparing(Child::getId));
-        children = CityMap.sortByCities(children);
+        children = CitySorter.sortByCities(children);
 
         for (Child child : children) {
             Double budget = child.getAssignedBudget();
@@ -131,6 +131,38 @@ public class NiceScoreCityStrategy implements Strategy {
                     if (budget >= possibleGifts.get(0).getPrice()
                             && possibleGifts.get(0).getQuantity() != 0) {
                         budget -= possibleGifts.get(0).getPrice();
+                        santa.decreaseQuantityForGift(possibleGifts.get(0).getProductName());
+                        giftReceived = new Gift(possibleGifts.get(0));
+                    }
+                }
+                if (giftReceived != null)
+                    child.addGift(giftReceived);
+            }
+        }
+        //Yellow elf assigns gift
+        for (Child child : children) {
+            if (santa.getElfForChild(child.getId()) == ElvesType.YELLOW
+                    && child.getReceivedGifts().isEmpty()) {
+                List<SantaGift> possibleGifts = new ArrayList<>();
+                for (SantaGift santaGift : santa.getSantaGifts()) {
+                    if (santaGift.getCategory() == child.getGiftsPreferences().get(0)) {
+                        possibleGifts.add(santaGift);
+                    }
+                }
+                Gift giftReceived = null;
+                //Assign gift if only 1 in category
+                if (possibleGifts.size() == 1
+                        && possibleGifts.get(0).getQuantity() != 0) {
+                    //Decrease quantity of gift in santa's sack
+                    santa.decreaseQuantityForGift(possibleGifts.get(0).getProductName());
+                    //Assign gift to child
+                    giftReceived = new Gift(possibleGifts.get(0));
+                    //Assign gift if more than 1 in category
+                } else if (possibleGifts.size() > 1) {
+                    //sort by price
+                    possibleGifts.sort(Comparator.comparing(SantaGift::getPrice));
+                    //if in budget
+                    if (possibleGifts.get(0).getQuantity() != 0) {
                         santa.decreaseQuantityForGift(possibleGifts.get(0).getProductName());
                         giftReceived = new Gift(possibleGifts.get(0));
                     }
