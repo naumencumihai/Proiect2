@@ -7,7 +7,7 @@ import java.util.List;
 
 public class NiceScoreStrategy implements Strategy{
     @Override
-    public List<Child> getChildrenThisYear(App app) {
+    public List<Child> getChildrenThisYear(App app, int year) {
         return null;
     }
 }

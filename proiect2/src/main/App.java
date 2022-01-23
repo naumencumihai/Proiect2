@@ -1,5 +1,7 @@
 package main;
 
+import entities.Child;
+import enums.CityStrategyEnum;
 import storage.OutputData;
 import entities.Santa;
 import entities.SantaChild;
@@ -15,6 +17,7 @@ import strategy.StrategyFactory;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import static common.Constants.FILE_EXTENSION;
@@ -51,21 +54,39 @@ public class App {
 
         numberOfYears = input.get("numberOfYears").asInt();
         annualChanges = mapper.readValue(annualChangesString, new TypeReference<>() {});
-        santa.setSantaChildren(santaChildren);
-        santa.setSantaGifts(santaGifts);
-        santa.setSantaBudget(input.get("santaBudget").asDouble());
+        santa = new Santa(santaChildren, santaGifts, input.get("santaBudget").asDouble());
     }
 
     public void WriteOutputData() {
         outputData = new OutputData();
-        for(int i = 0; i <= numberOfYears; i++) {
-            StrategyFactory strategyFactory = new StrategyFactory();
+        StrategyFactory strategyFactory = new StrategyFactory();
+        outputData.addChildrenThisYear(strategyFactory.
+                createStrategy(CityStrategyEnum.ID).getChildrenThisYear(this, 0));
+
+        for (int i = 0; i < numberOfYears; i++) {
             Strategy strategy = strategyFactory.createStrategy(annualChanges.get(i).getStrategy());
-            outputData.addChildrenThisYear(strategy.getChildrenThisYear(this));
+            System.out.println(strategy);
+            outputData.addChildrenThisYear(strategy.getChildrenThisYear(this, i + 1));
         }
     }
 
     public void WriteToFile(Integer testNumber) {
 
+    }
+
+    public List<AnnualChange> getAnnualChanges() {
+        return annualChanges;
+    }
+
+    public Santa getSanta() {
+        return santa;
+    }
+
+    public void setSanta(Santa santa) {
+        this.santa = santa;
+    }
+
+    public OutputData getOutputData() {
+        return outputData;
     }
 }

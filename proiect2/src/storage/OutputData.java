@@ -2,16 +2,13 @@ package storage;
 
 import entities.Child;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class OutputData {
-    private List<List<Child>> annualChildren;
+    private final List<List<Child>> annualChildren = new ArrayList<>();
 
     public OutputData() { }
-
-    public OutputData(List<List<Child>> annualChildren) {
-        this.annualChildren = annualChildren;
-    }
 
     public void addChildrenThisYear(List<Child> childrenThisYear) {
         annualChildren.add(childrenThisYear);
@@ -19,5 +16,12 @@ public class OutputData {
 
     public List<List<Child>> getAnnualChildren() {
         return annualChildren;
+    }
+
+    @Override
+    public String toString() {
+        return "OutputData{" +
+                "annualChildren=" + annualChildren +
+                '}';
     }
 }

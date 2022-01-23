@@ -6,5 +6,5 @@ import main.App;
 import java.util.List;
 
 public interface Strategy {
-    List<Child> getChildrenThisYear(App app);
+    List<Child> getChildrenThisYear(App app, int year);
 }

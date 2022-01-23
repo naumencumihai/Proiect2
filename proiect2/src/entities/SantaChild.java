@@ -27,10 +27,6 @@ public class SantaChild extends ChildSuper {
         this.elf = elf;
     }
 
-    public void increaseAge() {
-        this.age += 1;
-    }
-
     public int getId() {
         return id;
     }
@@ -105,26 +101,16 @@ public class SantaChild extends ChildSuper {
 
     @Override
     public String toString() {
-        return "{"
-                +
-                "id=" + id
-                +
-                ", lastName='" + lastName + '\''
-                +
-                ", firstName='" + firstName + '\''
-                +
-                ", age=" + age
-                +
-                ", city=" + city
-                +
-                ", niceScore=" + niceScore
-                +
-                ", giftsPreferences=" + giftsPreferences
-                +
-                ", niceScoreBonus=" + niceScoreBonus
-                +
-                ", elf=" + elf
-                +
+        return "SantaChild{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", age=" + age +
+                ", city=" + city +
+                ", giftsPreferences=" + giftsPreferences +
+                ", niceScore=" + niceScore +
+                ", niceScoreBonus=" + niceScoreBonus +
+                ", elf=" + elf +
                 '}';
     }
 }

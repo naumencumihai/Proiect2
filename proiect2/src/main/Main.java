@@ -18,8 +18,11 @@ public final class Main {
      */
     public static void main(final String[] args) throws JsonProcessingException {
         App app = new App();
-        app.ParseInput(27);
-
+        app.ParseInput(10);
+        app.WriteOutputData();
+        app.WriteToFile(10);
+//        System.out.println(app.getOutputData());
+//        System.out.println("\n" + app.getSanta());
 
         Checker.calculateScore();
     }
